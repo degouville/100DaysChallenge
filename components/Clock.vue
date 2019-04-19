@@ -4,25 +4,23 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      time: ''
-    }
-  },
+import { mapGetters, mapMutations } from 'vuex'
 
-  head() {
-    return {
-      title: this.time
-    }
+export default {
+  computed: {
+    ...mapGetters(['time'])
   },
 
   methods: {
     startClock() {
       setInterval(() => this.updateTime(), 1000)
     },
-    updateTime() {
-      this.time = new Date().toLocaleTimeString()
+    ...mapMutations(['updateTime'])
+  },
+
+  head() {
+    return {
+      title: this.time
     }
   },
 
